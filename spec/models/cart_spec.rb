@@ -102,7 +102,18 @@ RSpec.describe Cart, type: :model do
 
     describe 'total' do 
 
-      it "calculates the price of the cart's items" 
+      it "calculates the price of the cart's items" do 
+        item1 = build(:item, price: "10.99")
+        item2 = build(:item, price: "10.99")
+        item3 = build(:item, price: "11.99")
+        @cart.items << item1
+        @cart.items << item2 
+
+        expect(@cart.total).to eq(21.98)
+
+        @cart.items << item3
+        expect(@cart.total).to eq(33.97)
+     end
 
     end
 

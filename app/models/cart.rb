@@ -22,5 +22,9 @@ class Cart < ApplicationRecord
       end  
     end
   end
+
+  def total 
+    self.line_items.inject(0) { |sum, item| item.total + sum }
+  end
       
 end
