@@ -11,5 +11,16 @@ class Cart < ApplicationRecord
       item.is_inventory_available?(quantity) ? quantity : item.inventory 
     end
   end
+
+  def add_item(item, quantity)
+    if item.inventory != 0
+      line_item = self.line_items.find_by(item_id: item.id)
+      if line_item
+        line_item.update(quantity: set_quantity(line_item, item, quantity))
+      else 
+        self.line_items.create(item_id: item.id, quantity: set_quantity(nil, item, quantity)) 
+      end  
+    end
+  end
       
 end
