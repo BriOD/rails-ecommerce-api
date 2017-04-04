@@ -4,7 +4,12 @@ RSpec.describe Order, type: :model do
   
   describe 'validations' do 
 
-    it "requires a user"
+    it "requires a user" do 
+      order = Order.new
+
+      expect(order.valid?).to eq(false) 
+      expect(order.errors.full_messages).to eq([ "User must exist" ]) 
+    end
 
   end 
 
