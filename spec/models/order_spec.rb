@@ -22,7 +22,14 @@ RSpec.describe Order, type: :model do
       expect(order.user.id).not_to eq(nil)
     end
 
-    it 'has many order items'
+    it 'has many order items' do
+      order = create(:order)
+      item = create(:item)
+      order.order_items.create(quantity: 1, item: item)
+
+      expect(order.order_items.count).to eq(1)
+      expect(order.order_items.first.id).not_to eq(nil)
+    end
 
     it 'has many items through order items'  
     
