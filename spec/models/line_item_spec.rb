@@ -29,4 +29,16 @@ RSpec.describe LineItem, type: :model do
       expect(line_item.cart.id).not_to eq(nil)
     end
   end
+
+  describe 'instance methods' do 
+    
+    describe 'total' do 
+
+      it "multiplies the quantity of a line item with the item's price" do 
+        line_item = create(:line_item, quantity: 3)
+
+        expect(line_item.total).to eq(164.97)
+      end
+    end
+  end
 end
