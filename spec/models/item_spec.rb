@@ -47,4 +47,22 @@ RSpec.describe Item, type: :model do
       expect(item.order_items.first.id).not_to eq(nil)
     end
   end
+
+  describe "instance methods" do 
+
+    before(:each) do 
+      @item = create(:item, inventory: 4)
+    end
+
+    describe "is_inventory_available?(quantity)" do 
+
+      it "return true when quantity is less than or equal to the item's inventory count" do 
+        expect(@item.is_inventory_available?(3)).to eq(true)
+      end
+
+      it "returns false when item inventory count is 0 or less than quantity" do 
+        expect(@item.is_inventory_available?(10)).to eq(false)
+      end
+    end
+  end
 end
