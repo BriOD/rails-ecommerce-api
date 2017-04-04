@@ -19,9 +19,18 @@ RSpec.describe OrderItem, type: :model do
 
   describe 'relationships' do 
 
-    it 'belongs to an order' 
+    it 'belongs to an order' do 
+      order_item = create(:order_item)
+      
+      expect(order_item.order).not_to eq(nil)
+      expect(order_item.order.id).not_to eq(nil)
+    end
 
-    it 'belongs to an item' 
-    
+    it 'belongs to an item' do 
+      order_item = create(:order_item)
+      
+      expect(order_item.item).not_to eq(nil)
+      expect(order_item.item.id).not_to eq(nil)
+    end
   end
 end
