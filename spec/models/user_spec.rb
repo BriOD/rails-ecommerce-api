@@ -64,11 +64,11 @@ RSpec.describe User, type: :model do
       expect(cart).to eq(nil)
     end
 
-    it 'has many orders' #do
-      # user = create(:user)
-      # user.orders.create
+    it 'has many orders' do
+      user = create(:user)
+      user.orders.create
 
-      # expect(user.order.id).not_to eq(nil)
-    # end
+      expect(user.orders.first.id).not_to eq(nil)
+    end
   end
 end
