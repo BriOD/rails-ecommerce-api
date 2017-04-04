@@ -15,7 +15,12 @@ RSpec.describe Order, type: :model do
 
   describe 'relationships' do 
 
-    it 'belongs to a user' 
+    it 'belongs to a user' do 
+      order = build(:order)
+
+      expect(order.user).not_to eq(nil)
+      expect(order.user.id).not_to eq(nil)
+    end
 
     it 'has many order items'
 
