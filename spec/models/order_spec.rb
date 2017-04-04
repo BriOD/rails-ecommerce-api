@@ -15,23 +15,25 @@ RSpec.describe Order, type: :model do
 
   describe 'relationships' do 
 
-    it 'belongs to a user' do 
-      order = build(:order)
+    before(:each) do 
+      @order = create(:order)
+      @item = create(:item)
+      @order.order_items.create(quantity: 1, item: @item)
+    end
 
-      expect(order.user).not_to eq(nil)
-      expect(order.user.id).not_to eq(nil)
+    it 'belongs to a user' do 
+      expect(@order.user).not_to eq(nil)
+      expect(@order.user.id).not_to eq(nil)
     end
 
     it 'has many order items' do
-      order = create(:order)
-      item = create(:item)
-      order.order_items.create(quantity: 1, item: item)
-
-      expect(order.order_items.count).to eq(1)
-      expect(order.order_items.first.id).not_to eq(nil)
+      expect(@order.order_items.count).to eq(1)
+      expect(@order.order_items.first.id).not_to eq(nil)
     end
 
-    it 'has many items through order items'  
-    
+    it 'has many items through order items' do
+      expect(@order.items.count).to eq(1)
+      expect(@order.items.first.id).not_to eq(nil)
+    end
   end
 end
