@@ -119,16 +119,26 @@ RSpec.describe Cart, type: :model do
 
     describe "checkout" do 
 
-      it "creates an order with the carts items and deletes the cart" do 
-        user = @cart.user
-        @cart.checkout
-
-        expect(@cart).to eq(nil)
-        expect(user.orders.count).to eq(1)
+      before(:each) do 
+        item_1 = create(:item, title: 'monkey', price: "3.99", inventory: 3)
+        item_2 = create(:item, title: 'zebra', price: "4.99", inventory: 2)
+        item_3 = create(:item, title: 'lion', price: "5.99", inventory: 6)
+        @items = [item_1, item_2, item_3]
       end
 
-      it "also updates the item inventory count" 
+      it "creates an order with the carts items and deletes the carts line_items" do 
+        @items.each { |item| @cart.items << item }
+        user = @cart.user
+        item_ids = @cart.line_items.collect { |i| i.item_id }
 
+        @cart.checkout
+
+        expect(@cart.line_items.count).to eq(0)
+        expect(user.orders.count).to eq(1)
+        user.orders.first.order_items.each_with_index do |item, index| 
+           expect(item.item_id).to eq(item_ids[index])
+        end
+      end
     end
   end
 end

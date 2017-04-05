@@ -26,5 +26,13 @@ class Cart < ApplicationRecord
   def total 
     self.line_items.inject(0) { |sum, item| item.total + sum }
   end
+
+  def checkout 
+    order = self.user.orders.create
+    self.line_items.each do |line_item|
+      order.order_items.create(item_id: line_item.item_id, quantity: line_item.quantity)
+    end
+    self.line_items.destroy_all
+  end
       
 end
