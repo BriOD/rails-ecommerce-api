@@ -9,4 +9,12 @@ class Item < ApplicationRecord
   def is_inventory_available?(quantity)
     self.inventory != 0 && self.inventory >= quantity
   end
+
+  def update_inventory_count(quantity, type)
+    if type == 'remove'
+      self.update(inventory: self.inventory - quantity)
+    elsif type == 'add' 
+      self.update(inventory: self.inventory + quantity)
+    end   
+  end
 end
