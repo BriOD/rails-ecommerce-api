@@ -6,7 +6,7 @@ class Cart < ApplicationRecord
   def set_quantity(line_item = nil, item, quantity)
     if line_item 
       quantity_to_update = line_item.quantity + quantity
-      item.is_inventory_available?(quantity_to_update) ? quantity_to_update : item.inventory
+      item.is_inventory_available?(quantity) ? quantity_to_update : item.inventory
     else 
       item.is_inventory_available?(quantity) ? quantity : item.inventory 
     end
@@ -20,6 +20,7 @@ class Cart < ApplicationRecord
       else 
         self.line_items.create(item_id: item.id, quantity: set_quantity(nil, item, quantity)) 
       end  
+      item.update_inventory_count(quantity, 'remove')
     end
   end
 

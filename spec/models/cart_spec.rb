@@ -101,6 +101,12 @@ RSpec.describe Cart, type: :model do
         
         expect(@cart.line_items.count).to eq(0)
       end
+
+      it "updates the line item' associated item inventory count upon adding to the cart" do 
+        @cart.add_item(@item, 3)
+
+        expect(@item.inventory).to eq(1)
+      end
     end 
 
     describe 'total' do 
