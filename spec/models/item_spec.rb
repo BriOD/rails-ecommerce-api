@@ -64,5 +64,11 @@ RSpec.describe Item, type: :model do
         expect(@item.is_inventory_available?(10)).to eq(false)
       end
     end
+
+    describe 'update_inventory_count(quantity, type)' do 
+
+      it 'increases the inventory count by the quantity if type is "add"'
+
+      it 'reduceses the inventory count by the quantity if type is "remove"'
   end
 end
