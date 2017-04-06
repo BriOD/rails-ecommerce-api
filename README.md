@@ -49,6 +49,7 @@ POST /api/v1/users
   ```javascript
   {
     user: {
+      id: 1,
       email: ‘luke@flatironschool.com’ 
     }, 
     token: ‘123.abc.456.def.wayiuawehriw4y398rayrtau’	
