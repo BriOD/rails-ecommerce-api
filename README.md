@@ -35,7 +35,7 @@
 
 ## Server Side Routes 
 
-POST /api/v1/users  
+POST /api/v1/users  √
   - creates a user account 
 
   - Params 
@@ -62,7 +62,7 @@ POST /api/v1/auth
   - Params 
 
   ```javascript
-  { user: { id: 1, email: 'luke@flatironschool.com', password: 'password' } }
+  { user: { email: 'luke@flatironschool.com', password: 'password' } }
   ```
 
   - it returns the user info and a JWT token 
