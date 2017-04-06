@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe "Api::Users", type: :request do 
+RSpec.describe "Api::V1::Users", type: :request do 
 
   describe "POST /users" do 
 
